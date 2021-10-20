@@ -1,0 +1,28 @@
+{
+    "schemaVersion": 1,
+    "id": "girlbossed",
+    "version": "${version}",
+
+    "name": "Girlbossed",
+    "description": "A serverside mod for customizing death messsages!",
+    "authors": ["Tuxinal"],
+    "contact": {
+        "sources": "https://github.com/tuxinal/girlbossed"
+    },
+
+    "license": "MIT",
+    "icon": "assets/modid/icon.png",
+
+    "environment": "*",
+    "entrypoints": {
+        "main": ["xyz.tuxinal.girlbossed.Init"]
+    },
+    "mixins": ["girlbossed.mixins.json"],
+    "accessWidener": "girlbossed.accesswidener",
+    "depends": {
+        "fabricloader": ">=0.11.3",
+        "fabric": "*",
+        "minecraft": "1.17.x",
+        "java": ">=16"
+    }
+}

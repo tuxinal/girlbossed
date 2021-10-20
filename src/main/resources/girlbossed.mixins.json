@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "xyz.tuxinal.girlbossed.mixins",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [
+    "DeathMessageMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
