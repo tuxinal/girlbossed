@@ -2,13 +2,15 @@
 
 A serverside mod for customizing death messsages!
 
-don't ask about the name
+Don't ask about the name
 
 ## Configuration
 
-the config file is config/girlbossed.json
+The config file is `config/girlbossed.json`
 
-there are two types of deaths: Entity deaths and other deaths
+There are two types of deaths: Entity deaths and other deaths
+
+You can set a death messages to only apply to certain players
 
 Entity deaths are deaths that are caused by another entity or mob and they have an extra `attacker` value.
 
@@ -22,13 +24,18 @@ A config file would look like something like this:
     {
       "type": "arrow", // you can see a list of death types below
       "attacker": "minecraft:skeleton",
-      "deathMessage": "%1$s was shot by %2$s" // %1$s gets replaced by the player name and %2$s would be the attacker entity's name 
+      "deathMessage": "%1$s was shot by %2$s", // %1$s gets replaced by the player name and %2$s would be the attacker entity's name 
+      "players": [] // you can make a death message only apply to certain players, leave empty to apply to all players
     }
   ],
   "otherDeaths": [
     {
       "type": "fall",
-      "deathMessage": "%s couldn't girlboss gravity" // %s gets replaced by player name
+      "deathMessage": "%s couldn't girlboss gravity", // %s gets replaced by player name
+      "players":[
+        "Tuxinal",  // player names are case sensitive
+        "steve"     // there can be multiple players
+      ]
     }
   ]
 }
@@ -75,3 +82,4 @@ A config file would look like something like this:
 * `freeze`
 * `fallingStalactite`
 * `stalagmite`
+* `explosion` explosions that do not have a specific attacker (dispenser dropping tnt, etc)
