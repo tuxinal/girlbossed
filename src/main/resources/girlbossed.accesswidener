@@ -1,4 +1,4 @@
 accessWidener   v1      named
 extendable      method  net/minecraft/text/TranslatableText updateTranslations  ()V
-extendable      method  net/minecraft/text/TranslatableText setTranslation      (Ljava/lang/String;)V
+accessible      method  net/minecraft/text/TranslatableText forEachPart         (Ljava/lang/String;Ljava/util/function/Consumer;)V
 accessible      field   net/minecraft/text/TranslatableText translations        Ljava/util/List;

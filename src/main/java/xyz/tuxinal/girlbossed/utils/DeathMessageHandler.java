@@ -10,10 +10,9 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 
 public class DeathMessageHandler {
-    private static HashMap<String, String> entityDeathConfig = ConfigParser.getEntityDeathConfig();
-    private static HashMap<String, String> otherDeathConfig = ConfigParser.getOtherDeathConfig();
-
     public static Text getDeathMessage(DamageTracker damageTracker) {
+        HashMap<String, String> otherDeathConfig = ConfigParser.getOtherDeathConfig();
+        HashMap<String, String> entityDeathConfig = ConfigParser.getEntityDeathConfig();
         DamageSource damageSource = damageTracker.getMostRecentDamage().getDamageSource();
         ServerPlayerEntity player = (ServerPlayerEntity) damageTracker.getEntity();
         if (damageSource instanceof EntityDamageSource) {

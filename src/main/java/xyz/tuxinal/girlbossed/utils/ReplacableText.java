@@ -1,5 +1,8 @@
 package xyz.tuxinal.girlbossed.utils;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableList.Builder;
+
 import net.minecraft.text.StringVisitable;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.text.TranslationException;
@@ -16,14 +19,13 @@ public class ReplacableText extends TranslatableText {
 
     @Override
     protected void updateTranslations() {
-        this.translations.clear();
+        String string = this.getKey();
         try {
-            // we are using the key as our string
-            // so getKey doesn't make much sense
-            this.setTranslation(this.getKey());
+            Builder<StringVisitable> builder = ImmutableList.builder();
+            this.forEachPart(string, builder::add);
+            this.translations = builder.build();
         } catch (TranslationException var4) {
-            this.translations.clear();
-            this.translations.add(StringVisitable.plain(this.getKey()));
+            this.translations = ImmutableList.of(StringVisitable.plain(string));
         }
     }
 }
