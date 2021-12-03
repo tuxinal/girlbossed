@@ -11,7 +11,7 @@ import xyz.tuxinal.girlbossed.utils.DeathMessageHandler;
 
 @Mixin(ServerPlayerEntity.class)
 public class DeathMessageMixin {
-    @Redirect(method = "onDeath()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/damage/DamageTracker;getDeathMessage()Lnet/minecraft/text/Text;"))
+    @Redirect(method = "onDeath(Lnet/minecraft/entity/damage/DamageSource;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/damage/DamageTracker;getDeathMessage()Lnet/minecraft/text/Text;"))
     private Text deathMessage(DamageTracker damageTracker) {
         return DeathMessageHandler.getDeathMessage(damageTracker);
     }
