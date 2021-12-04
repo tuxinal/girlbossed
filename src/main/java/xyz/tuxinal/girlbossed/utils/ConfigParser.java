@@ -33,8 +33,8 @@ public class ConfigParser {
                 configFile.createNewFile();
                 FileWriter writer = new FileWriter(configFile);
                 Config configTemplate = new Config();
-                configTemplate.entityDeaths = new EntityDeathConfig[] { new EntityDeathConfig() };
-                configTemplate.otherDeaths = new DeathConfig[] { new DeathConfig() };
+                configTemplate.entityDeaths = new EntityDeathConfig[] { };
+                configTemplate.otherDeaths = new DeathConfig[] { };
                 writer.write(gson.toJson(configTemplate));
                 writer.close();
             }
