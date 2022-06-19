@@ -47,22 +47,23 @@ A config file would look like something like this:
 
 * `any`: any deaths that are caused by entities. will override any other configurations
 * `sting`
-* `mob`: mostly melee damage (llama spit and shulker bullet also count as mob damage)
+* `mob`
 * `player`
 * `arrow`
 * `trident`
 * `fireworks`
-* `onFire`: ghast and blaze fireballs
+* `fireball`
 * `witherSkull`
 * `indirectMagic`: harming potions, evoker fangs, guardian beam
 * `thorns`
-* `thrown`: eggs, enderpearls, snowballs (you can't actually kill with these they are just in the game (except maybe enderpearls, I'm unsure))
-* `explosion.player`: Explosions made by entities NOT JUST PLAYERS
+* `thrown`: eggs, enderpearls, snowballs (you can't actually kill with these they are just in the game)
+* `explosion.player`: Explosions made by entities (pretty much just players)
+* `sonic_boom`
 
 ### Other deaths
 
-* `inFire`: campfires
-* `onFire`: other sources of fire
+* `inFire`: fire damage taken while standing in fire (includes campfires)
+* `onFire`: fire damage taken while not being in fire
 * `lightningBolt`
 * `lava`
 * `hotFloor`: magma blocks

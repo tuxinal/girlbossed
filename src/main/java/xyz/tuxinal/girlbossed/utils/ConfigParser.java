@@ -51,15 +51,12 @@ public class ConfigParser {
             for (EntityDeathConfig entityDeathConfig : config.entityDeaths) {
                 if (entityDeathConfig.players.length != 0) {
                     for (String playerName : entityDeathConfig.players) {
-                        hashMap.putIfAbsent(entityDeathConfig.attacker + ":any:" + playerName,
-                                entityDeathConfig.deathMessage);
                         hashMap.putIfAbsent(
-                                entityDeathConfig.attacker + ":" + entityDeathConfig.type + ":" + playerName,
+                                entityDeathConfig.attacker + "+" + entityDeathConfig.type + "+" + playerName,
                                 entityDeathConfig.deathMessage);
                     }
                 } else {
-                    hashMap.putIfAbsent(entityDeathConfig.attacker + ":any", entityDeathConfig.deathMessage);
-                    hashMap.putIfAbsent(entityDeathConfig.attacker + ":" + entityDeathConfig.type,
+                    hashMap.putIfAbsent(entityDeathConfig.attacker + "+" + entityDeathConfig.type,
                             entityDeathConfig.deathMessage);
                 }
             }
@@ -71,7 +68,7 @@ public class ConfigParser {
             for (DeathConfig otherDeathConfig : config.otherDeaths) {
                 if (otherDeathConfig.players.length != 0) {
                     for (String playerName : otherDeathConfig.players) {
-                        hashMap.putIfAbsent(otherDeathConfig.type + ":" + playerName,
+                        hashMap.putIfAbsent(otherDeathConfig.type + "+" + playerName,
                                 otherDeathConfig.deathMessage);
                     }
                 } else {

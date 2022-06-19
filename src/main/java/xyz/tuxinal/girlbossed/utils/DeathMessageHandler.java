@@ -2,53 +2,59 @@ package xyz.tuxinal.girlbossed.utils;
 
 import java.util.HashMap;
 
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageTracker;
-import net.minecraft.entity.damage.EntityDamageSource;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.CombatTracker;
+import net.minecraft.world.damagesource.EntityDamageSource;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 
 public class DeathMessageHandler {
-    public static Text getDeathMessage(DamageTracker damageTracker) {
-        HashMap<String, String> otherDeathConfig = ConfigParser.getOtherDeathConfig();
-        HashMap<String, String> entityDeathConfig = ConfigParser.getEntityDeathConfig();
-        DamageSource damageSource = damageTracker.getMostRecentDamage().getDamageSource();
-        ServerPlayerEntity player = (ServerPlayerEntity) damageTracker.getEntity();
+    public static Component getDeathMessage(CombatTracker damageTracker) {
+        DamageSource damageSource = damageTracker.getLastEntry().getSource();
+        ServerPlayer player = (ServerPlayer) damageTracker.getMob();
         if (damageSource instanceof EntityDamageSource) {
-            String key = EntityType.getId(damageSource.getAttacker().getType()).toString() + ":"
-                    + damageSource.getName();
-            String anyKey = EntityType.getId(damageSource.getAttacker().getType()).toString() + ":any";
-            String playerKey = EntityType.getId(damageSource.getAttacker().getType()).toString() + ":"
-                    + player.getName().asString();
-            String playerAnyKey = EntityType.getId(damageSource.getAttacker().getType()).toString() + ":any:"
-                    + player.getName().asString();
+            HashMap<String, String> entityDeathConfig = ConfigParser.getEntityDeathConfig();
+
+            Entity attacker = damageSource.getEntity();
+            ResourceLocation attackerType = EntityType.getKey(attacker.getType());
+
+            String key = attackerType.toString() + "+" + damageSource.getMsgId();
+            String anyKey = attackerType.toString() + "+any";
+            String playerKey = attackerType.toString() + "+" + damageSource.getMsgId() + "+"
+                    + player.getName().getString();
+            String playerAnyKey = attackerType.toString() + "+any+" + player.getName().getString();
             if (entityDeathConfig.containsKey(playerAnyKey)) {
-                return new ReplacableText(entityDeathConfig.get(playerAnyKey), new Object[] {
-                        player.getDisplayName(), damageSource.getAttacker().getDisplayName() });
+                return MutableComponent.create(new ReplacableContents(entityDeathConfig.get(playerAnyKey),
+                        new Object[] { player.getDisplayName(), attacker.getDisplayName() }));
             }
             if (entityDeathConfig.containsKey(playerKey)) {
-                return new ReplacableText(entityDeathConfig.get(playerKey), new Object[] {
-                        player.getDisplayName(), damageSource.getAttacker().getDisplayName() });
+                return MutableComponent.create(new ReplacableContents(entityDeathConfig.get(playerKey),
+                        new Object[] { player.getDisplayName(), attacker.getDisplayName() }));
             }
             if (entityDeathConfig.containsKey(anyKey)) {
-                return new ReplacableText(entityDeathConfig.get(anyKey), new Object[] {
-                        player.getDisplayName(), damageSource.getAttacker().getDisplayName() });
+                return MutableComponent.create(new ReplacableContents(entityDeathConfig.get(anyKey),
+                        new Object[] { player.getDisplayName(), attacker.getDisplayName() }));
             }
             if (entityDeathConfig.containsKey(key)) {
-                return new ReplacableText(entityDeathConfig.get(key), new Object[] {
-                    player.getDisplayName(), damageSource.getAttacker().getDisplayName() });
+                return MutableComponent.create(new ReplacableContents(entityDeathConfig.get(key),
+                        new Object[] { player.getDisplayName(), attacker.getDisplayName() }));
             }
         } else {
-            String key = damageSource.getName();
-            String playerKey = damageSource.getName() + ":" + player.getName().asString();
+            HashMap<String, String> otherDeathConfig = ConfigParser.getOtherDeathConfig();
+
+            String key = damageSource.getMsgId();
+            String playerKey = damageSource.getMsgId() + "+" + player.getName().getString();
             if (otherDeathConfig.containsKey(playerKey)) {
-                return new ReplacableText(otherDeathConfig.get(playerKey),
-                        new Object[] { player.getDisplayName() });
+                return MutableComponent.create(new ReplacableContents(otherDeathConfig.get(playerKey),
+                        new Object[] { player.getDisplayName() }));
             }
             if (otherDeathConfig.containsKey(key)) {
-                return new ReplacableText(otherDeathConfig.get(key),
-                        new Object[] { player.getDisplayName() });
+                return MutableComponent.create(new ReplacableContents(otherDeathConfig.get(key),
+                        new Object[] { player.getDisplayName() }));
             }
         }
         return damageTracker.getDeathMessage();

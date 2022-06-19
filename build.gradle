@@ -1,7 +1,7 @@
 plugins {
-	id 'fabric-loom' version '0.10-SNAPSHOT'
+	id 'fabric-loom' version '0.12-SNAPSHOT'
 	id 'maven-publish'
-	id "io.github.juuxel.loom-quiltflower-mini" version "1.1.0"
+	id 'io.github.juuxel.loom-quiltflower' version '1.7.1'
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -22,7 +22,7 @@ repositories {
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	mappings loom.officialMojangMappings()
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.

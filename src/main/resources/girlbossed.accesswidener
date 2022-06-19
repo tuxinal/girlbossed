@@ -1,4 +1,4 @@
 accessWidener   v1      named
-extendable      method  net/minecraft/text/TranslatableText updateTranslations  ()V
-accessible      method  net/minecraft/text/TranslatableText forEachPart         (Ljava/lang/String;Ljava/util/function/Consumer;)V
-accessible      field   net/minecraft/text/TranslatableText translations        Ljava/util/List;
+extendable      method  net/minecraft/network/chat/contents/TranslatableContents decompose          ()V
+accessible      method  net/minecraft/network/chat/contents/TranslatableContents decomposeTemplate  (Ljava/lang/String;Ljava/util/function/Consumer;)V
+accessible      field   net/minecraft/network/chat/contents/TranslatableContents decomposedParts    Ljava/util/List;

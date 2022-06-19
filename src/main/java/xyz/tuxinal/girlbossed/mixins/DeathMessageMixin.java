@@ -4,15 +4,15 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import net.minecraft.entity.damage.DamageTracker;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
+import net.minecraft.world.damagesource.CombatTracker;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.network.chat.Component;
 import xyz.tuxinal.girlbossed.utils.DeathMessageHandler;
 
-@Mixin(ServerPlayerEntity.class)
+@Mixin(ServerPlayer.class)
 public class DeathMessageMixin {
-    @Redirect(method = "onDeath(Lnet/minecraft/entity/damage/DamageSource;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/damage/DamageTracker;getDeathMessage()Lnet/minecraft/text/Text;"))
-    private Text deathMessage(DamageTracker damageTracker) {
-        return DeathMessageHandler.getDeathMessage(damageTracker);
+    @Redirect(method = "Lnet/minecraft/server/level/ServerPlayer;die(Lnet/minecraft/world/damagesource/DamageSource;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/damagesource/CombatTracker;getDeathMessage()Lnet/minecraft/network/chat/Component;"))
+    private Component deathMessage(CombatTracker combatTracker) {
+        return DeathMessageHandler.getDeathMessage(combatTracker);
     }
 }

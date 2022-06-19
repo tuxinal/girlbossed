@@ -1,23 +1,24 @@
 package xyz.tuxinal.girlbossed;
 
-import static net.minecraft.server.command.CommandManager.literal;
+import static net.minecraft.commands.Commands.literal;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
-import net.minecraft.text.LiteralText;
-import net.minecraft.util.Formatting;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import xyz.tuxinal.girlbossed.utils.ConfigParser;
 
 public class Init implements ModInitializer {
     @Override
     public void onInitialize() {
         ConfigParser.init();
-        CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
+        CommandRegistrationCallback.EVENT.register((dispatcher, dedicated, environment) -> {
             dispatcher.register(
-                    literal("girlbossed-reload").requires(source -> source.hasPermissionLevel(4)).executes(context -> {
+                    literal("girlbossed-reload").requires(source -> source.hasPermission(4)).executes(context -> {
                         ConfigParser.init();
-                        context.getSource().sendFeedback(
-                                new LiteralText("Reloaded girlbossed config!").formatted(Formatting.YELLOW), true);
+                        context.getSource().sendSuccess(
+                                Component.literal("Reloaded girlbossed config!").withStyle(ChatFormatting.YELLOW),
+                                true);
                         return 1;
                     }));
         });
