@@ -16,9 +16,7 @@ public class Init implements ModInitializer {
             dispatcher.register(
                     literal("girlbossed-reload").requires(source -> source.hasPermission(4)).executes(context -> {
                         ConfigParser.init();
-                        context.getSource().sendSuccess(
-                                Component.literal("Reloaded girlbossed config!").withStyle(ChatFormatting.YELLOW),
-                                true);
+                        context.getSource().sendSystemMessage(Component.literal("Reload success.").withStyle(ChatFormatting.GREEN));
                         return 1;
                     }));
         });

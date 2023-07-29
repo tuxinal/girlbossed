@@ -10,13 +10,9 @@ import net.minecraft.network.chat.contents.TranslatableFormatException;
 public class ReplacableContents extends TranslatableContents {
 
     public ReplacableContents(String string, Object[] args) {
-        super(string, args);
+        super(string, null, args);
     }
 
-    public ReplacableContents(String string) {
-        super(string);
-    }
-    
     @Override
     protected void decompose() {
         String string = this.getKey();
