@@ -4,7 +4,7 @@
     "version": "${version}",
 
     "name": "Girlbossed",
-    "description": "A serverside mod for customizing death messsages!",
+    "description": "A serverside mod for customizing death messsages! Thanks GeoBaer for 1.20 Support!",
     "authors": ["Tuxinal"],
     "contact": {
         "sources": "https://github.com/tuxinal/girlbossed"
@@ -20,9 +20,9 @@
     "mixins": ["girlbossed.mixins.json"],
     "accessWidener": "girlbossed.accesswidener",
     "depends": {
-        "fabricloader": ">=0.14.7",
+        "fabricloader": ">=0.14.21",
         "fabric": "*",
-        "minecraft": "1.19.x",
+        "minecraft": "1.20.1",
         "java": ">=17"
     }
 }

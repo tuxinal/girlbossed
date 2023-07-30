@@ -6,17 +6,16 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.CombatTracker;
-import net.minecraft.world.damagesource.EntityDamageSource;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
 public class DeathMessageHandler {
-    public static Component getDeathMessage(CombatTracker damageTracker) {
-        DamageSource damageSource = damageTracker.getLastEntry().getSource();
-        ServerPlayer player = (ServerPlayer) damageTracker.getMob();
-        if (damageSource instanceof EntityDamageSource) {
+    public static Component getDeathMessage(CombatTracker damageTracker, ServerPlayer player) {
+        DamageSource damageSource = damageTracker.entries.get(damageTracker.entries.size()-1).source();
+
+        if (damageSource.getEntity() != null) {
             HashMap<String, String> entityDeathConfig = ConfigParser.getEntityDeathConfig();
 
             Entity attacker = damageSource.getEntity();

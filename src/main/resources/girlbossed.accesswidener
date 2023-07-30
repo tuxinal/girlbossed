@@ -2,3 +2,4 @@ accessWidener   v1      named
 extendable      method  net/minecraft/network/chat/contents/TranslatableContents decompose          ()V
 accessible      method  net/minecraft/network/chat/contents/TranslatableContents decomposeTemplate  (Ljava/lang/String;Ljava/util/function/Consumer;)V
 accessible      field   net/minecraft/network/chat/contents/TranslatableContents decomposedParts    Ljava/util/List;
+accessible      field   net/minecraft/world/damagesource/CombatTracker           entries            Ljava/util/List;
